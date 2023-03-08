@@ -35,3 +35,7 @@
   color: white;
   transform: rotateY(180deg);
 }
+
+.subText {
+  font-size: 0.8rem;
+}
