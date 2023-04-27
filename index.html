@@ -16,6 +16,10 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      rel="stylesheet"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -55,7 +59,7 @@
             </header>
 
             <div class="p-5 mb-4 bg-light rounded-3 shadow">
-              <div class="container-fluid py-3 subText">
+              <div class="container-fluid py-2 subText">
                 <h4 class="fw-bold">Hello!</h4>
                 <p>
                   你好，我是Ryan。我是從資展國際（原資策會）結訓的學生，目標是想當前端工程師。我在課程中學習了許多有關前端開發的知識與技能，並且在課程最後的專案中運用到了React搭配nodejs以及mySQL。我喜歡嘗試以及學習新的技術，希望成為能夠貢獻於前端領域的人才。
@@ -63,99 +67,125 @@
                 <p>
                   歡迎看看我的作品！除了這個網頁本身之外，我還有從資展國際（原資策會）結訓的專題，內容是模仿電商網站的購物平台，主要功能有商品購買、購物車結帳功能，還有訂單查詢、會員資料修改、收藏商品……等、還有其他組員做的一些功能。課程結束後我有繼續修改，想把每個功能都自己做一次，看一下組員踩過的坑，當作練習繼續前進！
                 </p>
-                <p>
-                  如果您有興趣與我合作或是輕鬆聊聊，下方有我的Email，歡迎隨時寄信給我。
-                </p>
               </div>
             </div>
 
             <div class="row align-items-md-stretch">
-              <div class="col-md-6 mb-4 mb-md-0">
-                <div class="flip-card rounded-3">
-                  <div
-                    class="flip-card-inner h-100 bg-secondary bg-opacity-50 rounded-3 shadow"
+              <div class="col">
+                <p>
+                  <button
+                    class="btn btn-outline-secondary shadow-sm"
+                    data-bs-toggle="collapse"
+                    href="#collapseFolder"
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="collapseFolder"
                   >
-                    <div class="flip-card-front rounded-3">
-                      <h4
-                        class="fw-bold position-absolute top-50 start-50 translate-middle"
-                      >
-                        與我聯絡
-                      </h4>
-                    </div>
-                    <div class="flip-card-back bg-dark rounded-3 py-4">
-                      <h4>Ryan</h4>
-                      <p class="subText">
-                        電子信箱:<br /><a href="mailto:ryanworktw123@gmail.com"
-                          >ryanworktw123@gmail.com</a
+                    作品集
+                  </button>
+                </p>
+
+                <div class="collapse shadow rounded-3" id="collapseFolder">
+                  <div class="card card-body p-4">
+                    <div class="accordion" id="accordionFolder">
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                          <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne"
+                            aria-expanded="false"
+                            aria-controls="collapseOne"
+                          >
+                            購物網站React
+                          </button>
+                        </h2>
+                        <div
+                          id="collapseOne"
+                          class="accordion-collapse collapse"
+                          aria-labelledby="headingOne"
+                          data-bs-parent="#accordionFolder"
                         >
-                      </p>
-                      <button
-                        class="btn btn-outline-secondary"
-                        type="button"
-                        onclick="copy()"
-                        id="btn_copy"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="20"
-                          height="20"
-                          fill="currentColor"
-                          class="bi bi-stickies-fill"
-                          viewBox="0 0 16 16"
+                          <div class="accordion-body">
+                            <strong
+                              >在資展國際(原資策會)上課時做的專題練習</strong
+                            ><br />
+                            這是在前端就業養成班的作品，主要是做咖啡商品的購物平台，是用React搭配Nodejs。我負責的部分有購物車、會員中心、首頁廣告、結帳畫面、優惠券。原本商品列表、商品細節頁面是其他同學負責，但這版本我全部重新做過，所以目前能操作的頁面我都有練習到。<br />
+                            <a
+                              class="btn btn-outline-secondary btn-sm"
+                              href="https://github.com/nname123/react-exercise"
+                            >
+                              過去看看!
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                          <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo"
+                            aria-expanded="false"
+                            aria-controls="collapseTwo"
+                          >
+                            有趣的空白網頁
+                          </button>
+                        </h2>
+                        <div
+                          id="collapseTwo"
+                          class="accordion-collapse collapse"
+                          aria-labelledby="headingTwo"
+                          data-bs-parent="#accordionFolder"
                         >
-                          <path
-                            d="M0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5A1.5 1.5 0 0 0 0 1.5z"
-                          />
-                          <path
-                            d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zm6 8.5a1 1 0 0 1 1-1h4.396a.25.25 0 0 1 .177.427l-5.146 5.146a.25.25 0 0 1-.427-.177V10.5z"
-                          />
-                        </svg>
-                        <span class="subText">按這複製</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="flip-card rounded-3">
-                  <div
-                    class="flip-card-inner h-100 bg-secondary bg-opacity-25 rounded-3 shadow"
-                  >
-                    <div class="flip-card-front rounded-3">
-                      <h4
-                        class="fw-bold position-absolute top-50 start-50 translate-middle"
-                      >
-                        我的作品
-                      </h4>
-                    </div>
-                    <div class="flip-card-back bg-dark rounded-3 py-4">
-                      <h4>
-                        nname123/<br class="d-none d-md-inline" />react-exercise
-                      </h4>
-                      <p class="mb-4 mb-md-3 subText">
-                        <span class="">在資展國際(原資策會)上課時做的</span
-                        >專題練習
-                      </p>
-                      <button
-                        class="btn btn-outline-secondary"
-                        onclick="location.href='https://github.com/nname123/react-exercise'"
-                        type="button"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          class="bi bi-github me-2"
-                          viewBox="0 0 16 16"
-                          width="20"
-                          height="20"
+                          <div class="accordion-body">
+                            <strong>檢視網頁原始碼沒有東西的網頁</strong><br />
+                            這是我上完PHP的課後想到老師說前端沒有秘密，但PHP的程式碼不會顯示在原始碼上，我就好奇html是不是也可以隱藏，因此上網找到類似的教學並且自己試試看，但要放在Github
+                            Pages最短還是要兩行。<br />
+                            <a
+                              class="btn btn-outline-secondary btn-sm"
+                              href="/nothing/index.html"
+                            >
+                              過去看看!
+                            </a>
+                            <a
+                              class="btn btn-outline-success btn-sm"
+                              href="https://github.com/PwnFunction/Blank-Rick-Roll"
+                            >
+                              來源
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                          <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree"
+                            aria-expanded="false"
+                            aria-controls="collapseThree"
+                          >
+                            預留給Vue
+                          </button>
+                        </h2>
+                        <div
+                          id="collapseThree"
+                          class="accordion-collapse collapse"
+                          aria-labelledby="headingThree"
+                          data-bs-parent="#accordionFolder"
                         >
-                          <title>GitHub</title>
-                          <path
-                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-                          />
-                        </svg>
-                        <span class="subText">過去看看!</span>
-                      </button>
+                          <div class="accordion-body">
+                            <strong
+                              >預留給Vue</strong
+                            >
+                            蠻多職缺都使用Vue，還是要學一下QQ
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -167,14 +197,6 @@
         </div>
       </div>
     </main>
-    <script>
-      function copy() {
-        let myEmail = "ryanworktw123@gmail.com";
-        let btn = document.getElementById("btn_copy");
-        navigator.clipboard.writeText(myEmail);
-        btn.innerText = "複製好囉!";
-      }
-    </script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
       integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
