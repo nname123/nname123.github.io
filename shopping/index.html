@@ -8,6 +8,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    <link rel="stylesheet" href="style.css" />
 
     <!-- Bootstrap CSS v5.2.1 -->
     <link
@@ -52,7 +53,16 @@
               </li>
             </ul>
             <div class="col"></div>
-            <button type="button" class="btn btn-secondary">購物車</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasRight"
+              aria-controls="offcanvasRight"
+            >
+              購物車
+            </button>
           </div>
         </div>
       </nav>
@@ -108,6 +118,77 @@
 
       <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 list"></div>
     </div>
+    <div
+      class="offcanvas offcanvas-end"
+      tabindex="-1"
+      id="offcanvasRight"
+      aria-labelledby="offcanvasRightLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 id="offcanvasRightLabel" class="my-auto">購物車</h5>
+        <button
+          type="button"
+          class="btn-close text-reset"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ol class="list-group list-group-numbered cartList">
+          <li
+            class="list-group-item d-flex justify-content-between align-items-start"
+          >
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">第1個商品</div>
+              $159
+            </div>
+            <button type="button" class="btn my-auto"><</button>
+            <span class="badge bg-primary rounded-pill mx-1 my-auto">1</span>
+            <button type="button" class="btn my-auto">></button>
+            <button
+              type="button"
+              class="btn-close ms-2"
+              aria-label="Close"
+            ></button>
+          </li>
+          <li
+            class="list-group-item d-flex justify-content-between align-items-start"
+          >
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">第1個商品</div>
+              $159
+            </div>
+            <button type="button" class="btn my-auto"><</button>
+            <span class="badge bg-primary rounded-pill mx-1 my-auto">8</span>
+            <button type="button" class="btn my-auto">></button>
+            <button
+              type="button"
+              class="btn-close ms-2"
+              aria-label="Close"
+            ></button>
+          </li>
+          <li
+            class="list-group-item d-flex justify-content-between align-items-start"
+          >
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">第1個商品</div>
+              $159
+            </div>
+            <button type="button" class="btn my-auto"><</button>
+            <span class="badge bg-primary rounded-pill mx-1 my-auto">12</span>
+            <button type="button" class="btn my-auto">></button>
+            <button
+              type="button"
+              class="btn-close ms-2"
+              aria-label="Close"
+              onClick="{deleteCart(2)}"
+            ></button>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- footer -->
     <div class="container">
       <footer
         class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
@@ -193,7 +274,6 @@
     <script>
       const list = document.querySelector(".list");
       let content = "";
-
       for (let i = 1; i <= 9; i++) {
         const domString = `
         <div class="col">
@@ -201,7 +281,7 @@
             <img src="./img/${i}.png" class="card-img-top" alt="cat" />
             <div class="card-body">
               <h5 class="card-title placeholder-glow">
-                <span class="placeholder col-6"></span>
+                <strong>第${i}個商品</strong>
               </h5>
               <p class="card-text placeholder-glow mb-2">
                 <span class="placeholder col-7"></span>
@@ -231,7 +311,7 @@
                       />
                     </svg>
                   </button>
-                  <button class="btn btn-secondary">
+                  <button onClick={addCart(${i})}  class="btn btn-secondary">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -254,6 +334,52 @@
         content += domString;
       }
       list.innerHTML = content;
+
+      // --------------------------
+      let shoppingCart = {};
+      function addCart(number) {
+        console.log("按下", number);
+        // shoppingCart.push(number);
+        shoppingCart[number] = shoppingCart[number]
+          ? shoppingCart[number] + 1
+          : 1;
+        console.log("結果", shoppingCart);
+      }
+      function deleteCart(number) {
+        console.log("按下", number);
+        // shoppingCart = shoppingCart.filter(function (value, index, arr) {
+        //   return value !== number;
+        // });
+        delete shoppingCart[number];
+        console.log("結果", shoppingCart);
+      }
+      // --------------------------
+      // const cartList = document.querySelector(".cartList");
+      // let cartContent = "";
+
+      // for (let i = 1; i <= 9; i++) {
+      //   const cartString = `
+      //   <li
+      //       class="list-group-item d-flex justify-content-between align-items-start"
+      //     >
+      //       <div class="ms-2 me-auto">
+      //         <div class="fw-bold">第1個商品</div>
+      //         $159
+      //       </div>
+      //       <button type="button" class="btn my-auto"><</button>
+      //       <span class="badge bg-primary rounded-pill mx-1 my-auto">1</span>
+      //       <button type="button" class="btn my-auto">></button>
+      //       <button
+      //         type="button"
+      //         class="btn-close ms-2"
+      //         aria-label="Close"
+      //       ></button>
+      //     </li>
+      //   `;
+      //   cartContent += cartString;
+      // }
+      // cartList.innerHTML = cartContent;
+      // --------------------------
     </script>
   </body>
 </html>
