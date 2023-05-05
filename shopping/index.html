@@ -165,6 +165,7 @@
               type="button"
               class="btn-close ms-2"
               aria-label="Close"
+              onClick="{changeCart()}"
             ></button>
           </li>
           <li
@@ -344,6 +345,7 @@
           ? shoppingCart[number] + 1
           : 1;
         console.log("結果", shoppingCart);
+        changeCart();
       }
       function deleteCart(number) {
         console.log("按下", number);
@@ -352,33 +354,40 @@
         // });
         delete shoppingCart[number];
         console.log("結果", shoppingCart);
+        console.log("結果2", Object.keys(shoppingCart));
+        console.log("結果4", Object.values(shoppingCart));
+        changeCart();
       }
       // --------------------------
-      // const cartList = document.querySelector(".cartList");
-      // let cartContent = "";
-
-      // for (let i = 1; i <= 9; i++) {
-      //   const cartString = `
-      //   <li
-      //       class="list-group-item d-flex justify-content-between align-items-start"
-      //     >
-      //       <div class="ms-2 me-auto">
-      //         <div class="fw-bold">第1個商品</div>
-      //         $159
-      //       </div>
-      //       <button type="button" class="btn my-auto"><</button>
-      //       <span class="badge bg-primary rounded-pill mx-1 my-auto">1</span>
-      //       <button type="button" class="btn my-auto">></button>
-      //       <button
-      //         type="button"
-      //         class="btn-close ms-2"
-      //         aria-label="Close"
-      //       ></button>
-      //     </li>
-      //   `;
-      //   cartContent += cartString;
-      // }
-      // cartList.innerHTML = cartContent;
+      const cartList = document.querySelector(".cartList");
+      function changeCart() {
+        console.log("改變");
+        let cartContent = "";
+        Object.entries(shoppingCart).forEach(([key, value]) => {
+          console.log("列表的值", [key, value]);
+          let cartString = `
+        <li
+            class="list-group-item d-flex justify-content-between align-items-start"
+          >
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">第${key}個商品</div>
+              $${key * 159 * value}
+            </div>
+            <button type="button" class="btn my-auto"><</button>
+            <span class="badge bg-primary rounded-pill mx-1 my-auto">${value}</span>
+            <button type="button" class="btn my-auto">></button>
+            <button
+              type="button"
+              class="btn-close ms-2"
+              aria-label="Close"
+              onClick="{deleteCart(${key})}"
+            ></button>
+          </li>
+        `;
+          cartContent += cartString;
+        });
+        cartList.innerHTML = cartContent;
+      }
       // --------------------------
     </script>
   </body>
