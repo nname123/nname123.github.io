@@ -134,56 +134,14 @@
         ></button>
       </div>
       <div class="offcanvas-body">
-        <ol class="list-group list-group-numbered cartList">
+        <ol class="list-group cartList">
           <li
-            class="list-group-item d-flex justify-content-between align-items-start"
+            class="list-group-item d-flex justify-content-between align-items-start disabled"
           >
             <div class="ms-2 me-auto">
-              <div class="fw-bold">第1個商品</div>
-              $159
+              <div class="fw-bold">購物車是空的</div>
+              快去購物!~
             </div>
-            <button type="button" class="btn my-auto"><</button>
-            <span class="badge bg-primary rounded-pill mx-1 my-auto">1</span>
-            <button type="button" class="btn my-auto">></button>
-            <button
-              type="button"
-              class="btn-close ms-2"
-              aria-label="Close"
-            ></button>
-          </li>
-          <li
-            class="list-group-item d-flex justify-content-between align-items-start"
-          >
-            <div class="ms-2 me-auto">
-              <div class="fw-bold">第1個商品</div>
-              $159
-            </div>
-            <button type="button" class="btn my-auto"><</button>
-            <span class="badge bg-primary rounded-pill mx-1 my-auto">8</span>
-            <button type="button" class="btn my-auto">></button>
-            <button
-              type="button"
-              class="btn-close ms-2"
-              aria-label="Close"
-              onClick="{changeCart()}"
-            ></button>
-          </li>
-          <li
-            class="list-group-item d-flex justify-content-between align-items-start"
-          >
-            <div class="ms-2 me-auto">
-              <div class="fw-bold">第1個商品</div>
-              $159
-            </div>
-            <button type="button" class="btn my-auto"><</button>
-            <span class="badge bg-primary rounded-pill mx-1 my-auto">12</span>
-            <button type="button" class="btn my-auto">></button>
-            <button
-              type="button"
-              class="btn-close ms-2"
-              aria-label="Close"
-              onClick="{deleteCart(2)}"
-            ></button>
           </li>
         </ol>
       </div>
@@ -338,30 +296,34 @@
 
       // --------------------------
       let shoppingCart = {};
-      function addCart(number) {
-        console.log("按下", number);
-        // shoppingCart.push(number);
-        shoppingCart[number] = shoppingCart[number]
-          ? shoppingCart[number] + 1
-          : 1;
+      function addCart(item) {
+        // shoppingCart[item] = shoppingCart[item] ? shoppingCart[item] + 1 : 1;
+        // console.log("結果", shoppingCart);
+        // changeCart();
+        increase(item);
+      }
+      function deleteCart(item) {
+        delete shoppingCart[item];
+        changeCart();
+      }
+
+      function increase(item) {
+        console.log("增加");
+        shoppingCart[item] = shoppingCart[item] ? shoppingCart[item] + 1 : 1;
         console.log("結果", shoppingCart);
         changeCart();
       }
-      function deleteCart(number) {
-        console.log("按下", number);
-        // shoppingCart = shoppingCart.filter(function (value, index, arr) {
-        //   return value !== number;
-        // });
-        delete shoppingCart[number];
+      function decrease(item) {
+        console.log("減少");
+        shoppingCart[item] =
+          shoppingCart[item] > 2 ? shoppingCart[item] - 1 : 1;
         console.log("結果", shoppingCart);
-        console.log("結果2", Object.keys(shoppingCart));
-        console.log("結果4", Object.values(shoppingCart));
         changeCart();
       }
       // --------------------------
       const cartList = document.querySelector(".cartList");
       function changeCart() {
-        console.log("改變");
+        console.log("改變", shoppingCart);
         let cartContent = "";
         Object.entries(shoppingCart).forEach(([key, value]) => {
           console.log("列表的值", [key, value]);
@@ -373,9 +335,9 @@
               <div class="fw-bold">第${key}個商品</div>
               $${key * 159 * value}
             </div>
-            <button type="button" class="btn my-auto"><</button>
+            <button type="button" class="btn my-auto" onClick="{decrease(${key})}" ><</button>
             <span class="badge bg-primary rounded-pill mx-1 my-auto">${value}</span>
-            <button type="button" class="btn my-auto">></button>
+            <button type="button" class="btn my-auto" onClick="{increase(${key})}" >></button>
             <button
               type="button"
               class="btn-close ms-2"
@@ -384,9 +346,24 @@
             ></button>
           </li>
         `;
+          console.log("長度", shoppingCart);
           cartContent += cartString;
         });
-        cartList.innerHTML = cartContent;
+
+        if (Object.keys(shoppingCart).length > 0) {
+          cartList.innerHTML = cartContent;
+        } else {
+          cartList.innerHTML = `
+          <li
+            class="list-group-item d-flex justify-content-between align-items-start disabled"
+          >
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">購物車是空的</div>
+              快去購物!~
+            </div>
+          </li>
+          `;
+        }
       }
       // --------------------------
     </script>
