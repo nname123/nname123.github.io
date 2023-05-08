@@ -21,7 +21,7 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container-fluid">
           <a class="navbar-brand" href="#"
             ><img src="./img/logo.png" alt="" width="80"
@@ -68,7 +68,11 @@
       </nav>
     </header>
     <div class="container py-3">
-      <div id="carouselControls" class="carousel slide" data-bs-ride="carousel">
+      <div
+        id="carouselControls"
+        class="carousel slide pt-5"
+        data-bs-ride="carousel"
+      >
         <div class="carousel-inner">
           <div class="carousel-item active" data-bs-interval="2000">
             <img src="./img/Carousels-1.png" class="d-block w-100" alt="..." />
@@ -144,6 +148,18 @@
             </div>
           </li>
         </ol>
+        <div class="d-grid gap-2 col-6 mx-auto mt-3">
+          <button id="checkout" class="btn btn-success disabled" type="button">
+            結帳
+          </button>
+          <button
+            class="btn btn-outline-danger"
+            type="button"
+            onClick="{clearCart()}"
+          >
+            清空購物車
+          </button>
+        </div>
       </div>
     </div>
 
@@ -306,6 +322,10 @@
         delete shoppingCart[item];
         changeCart();
       }
+      function clearCart() {
+        shoppingCart = {};
+        changeCart();
+      }
 
       function increase(item) {
         console.log("增加");
@@ -322,6 +342,7 @@
       }
       // --------------------------
       const cartList = document.querySelector(".cartList");
+      const checkoutBtn = document.querySelector("#checkout");
       function changeCart() {
         console.log("改變", shoppingCart);
         let cartContent = "";
@@ -352,6 +373,7 @@
 
         if (Object.keys(shoppingCart).length > 0) {
           cartList.innerHTML = cartContent;
+          checkoutBtn.classList.remove("disabled");
         } else {
           cartList.innerHTML = `
           <li
@@ -363,6 +385,7 @@
             </div>
           </li>
           `;
+          checkoutBtn.classList.add("disabled");
         }
       }
       // --------------------------
