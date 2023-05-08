@@ -120,7 +120,9 @@
         </li>
       </ul>
 
-      <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 list"></div>
+      <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 list">
+        <!-- 加list -->
+      </div>
     </div>
     <div
       class="offcanvas offcanvas-end"
@@ -248,7 +250,11 @@
 
     <script>
       const list = document.querySelector(".list");
+      let shoppingCart = {};
       let content = "";
+      const cartList = document.querySelector(".cartList");
+      const checkoutBtn = document.querySelector("#checkout");
+
       for (let i = 1; i <= 15; i++) {
         const domString = `
         <div class="col">
@@ -286,7 +292,7 @@
                       />
                     </svg>
                   </button>
-                  <button onClick={addCart(${i})}  class="btn btn-secondary">
+                  <button onClick={addCart(${i})}  class="btn btn-secondary position-relative">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -299,6 +305,12 @@
                         d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
                       />
                     </svg>
+                    <span
+                      id="itemNum${i}"
+                      class="visually-hidden position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                    >
+                      0
+                    </span>
                   </button>
                 </div>
               </div>
@@ -311,43 +323,40 @@
       list.innerHTML = content;
 
       // --------------------------
-      let shoppingCart = {};
       function addCart(item) {
-        // shoppingCart[item] = shoppingCart[item] ? shoppingCart[item] + 1 : 1;
-        // console.log("結果", shoppingCart);
-        // changeCart();
         increase(item);
       }
       function deleteCart(item) {
         delete shoppingCart[item];
+        let itemNum = document.querySelector(`#itemNum${item}`);
+        itemNum.classList.add("visually-hidden");
         changeCart();
       }
       function clearCart() {
+        Object.keys(shoppingCart).forEach((key) => {
+          let itemNum = document.querySelector(`#itemNum${key}`);
+          itemNum.classList.add("visually-hidden");
+        });
         shoppingCart = {};
         changeCart();
       }
 
       function increase(item) {
-        console.log("增加");
         shoppingCart[item] = shoppingCart[item] ? shoppingCart[item] + 1 : 1;
-        console.log("結果", shoppingCart);
         changeCart();
       }
       function decrease(item) {
-        console.log("減少");
         shoppingCart[item] =
           shoppingCart[item] > 2 ? shoppingCart[item] - 1 : 1;
-        console.log("結果", shoppingCart);
         changeCart();
       }
       // --------------------------
-      const cartList = document.querySelector(".cartList");
-      const checkoutBtn = document.querySelector("#checkout");
+
       function changeCart() {
-        console.log("改變", shoppingCart);
+        // console.log("改變", shoppingCart);
         let cartContent = "";
         Object.entries(shoppingCart).forEach(([key, value]) => {
-          console.log("列表的值", [key, value]);
+          // console.log("列表的值", [key, value]);
           let cartString = `
         <li
             class="list-group-item d-flex justify-content-between align-items-start"
@@ -367,8 +376,12 @@
             ></button>
           </li>
         `;
-          console.log("長度", shoppingCart);
+          // console.log("長度", shoppingCart);
           cartContent += cartString;
+
+          let itemNum = document.querySelector(`#itemNum${key}`);
+          itemNum.classList.remove("visually-hidden");
+          itemNum.textContent = value;
         });
 
         if (Object.keys(shoppingCart).length > 0) {
