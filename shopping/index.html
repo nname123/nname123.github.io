@@ -151,7 +151,14 @@
           </li>
         </ol>
         <div class="d-grid gap-2 col-6 mx-auto mt-3">
-          <button id="checkout" class="btn btn-success disabled" type="button">
+          <button
+            id="checkoutBtn"
+            class="btn btn-success disabled"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+            onClick="{checkout()}"
+          >
             結帳
           </button>
           <button
@@ -161,6 +168,94 @@
           >
             清空購物車
           </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 提示訊息 -->
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">確認下單</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <table class="table text-center">
+              <thead>
+                <tr>
+                  <th scope="col">序號</th>
+                  <th scope="col">商品名稱</th>
+                  <th scope="col">數量</th>
+                  <th scope="col">單價</th>
+                  <th scope="col">小計</th>
+                </tr>
+              </thead>
+              <tbody class="checkoutList"></tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              取消下單
+            </button>
+            <!-- <button type="button" class="btn btn-primary">確認送出</button> -->
+            <button
+              class="btn btn-primary"
+              data-bs-target="#ModalToggle"
+              data-bs-toggle="modal"
+              onClick="{clearCart()}"
+            >
+              確認送出
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="ModalToggle"
+      aria-hidden="true"
+      aria-labelledby="ModalToggleLabel"
+      tabindex="-1"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ModalToggleLabel">送出結果</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">下單成功</div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              確定
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -253,7 +348,8 @@
       let shoppingCart = {};
       let content = "";
       const cartList = document.querySelector(".cartList");
-      const checkoutBtn = document.querySelector("#checkout");
+      const checkoutBtn = document.querySelector("#checkoutBtn");
+      const checkoutList = document.querySelector(".checkoutList");
 
       for (let i = 1; i <= 15; i++) {
         const domString = `
@@ -350,7 +446,6 @@
           shoppingCart[item] > 2 ? shoppingCart[item] - 1 : 1;
         changeCart();
       }
-      // --------------------------
 
       function changeCart() {
         // console.log("改變", shoppingCart);
@@ -402,6 +497,34 @@
         }
       }
       // --------------------------
+      function checkout() {
+        let checkoutContent = "";
+        let total = 0;
+        Object.entries(shoppingCart).forEach(([key, value], index) => {
+          // console.log("列表的值", [key, value]);
+          let checkoutString = `
+          <tr>
+              <th scope="row">${index + 1}</th>
+              <td>第${key}個商品</td>
+              <td>${value}</td>
+              <td>${key * 159}</td>
+              <td>${key * 159 * value}</td>
+          </tr>
+        `;
+          checkoutContent += checkoutString;
+          total += key * 159 * value;
+        });
+        checkoutContent += `
+          <tr>
+              <th scope="row">總金額</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>${total}</td>
+          </tr>
+        `;
+        checkoutList.innerHTML = checkoutContent;
+      }
     </script>
   </body>
 </html>
