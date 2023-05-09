@@ -344,6 +344,128 @@
     ></script>
 
     <script>
+      const productData = [
+        {
+          id: 1,
+          name: "假笑貓",
+          detail: "這隻可愛的貓貓正在假笑!",
+          price: 150,
+          quantity: 100,
+          img: "1",
+        },
+        {
+          id: 2,
+          name: "知識增加貓",
+          detail: "奇怪的知識增加囉!",
+          price: 150,
+          quantity: 100,
+          img: "2",
+        },
+        {
+          id: 3,
+          name: "嚇尿貓",
+          detail: "小心點!它會被你嚇你一跳。",
+          price: 150,
+          quantity: 100,
+          img: "3",
+        },
+        {
+          id: 4,
+          name: "哭哭黑貓",
+          detail: "這隻貓貓總是在哭哭。",
+          price: 150,
+          quantity: 100,
+          img: "4",
+        },
+        {
+          id: 5,
+          name: "哭哭白貓",
+          detail: "這隻貓貓幫你大哭一場。",
+          price: 150,
+          quantity: 100,
+          img: "5",
+        },
+        {
+          id: 6,
+          name: "哭哭虎班貓",
+          detail: "就算哭哭也要滑手機。",
+          price: 150,
+          quantity: 100,
+          img: "6",
+        },
+        {
+          id: 7,
+          name: "霸凌貓貓",
+          detail: "這隻貓性格兇猛，小心被欺負。",
+          price: 150,
+          quantity: 100,
+          img: "7",
+        },
+        {
+          id: 8,
+          name: "外星人",
+          detail: "它好像是從外星來的！",
+          price: 150,
+          quantity: 100,
+          img: "8",
+        },
+        {
+          id: 9,
+          name: "交叉貓貓",
+          detail: "這奇葩姿勢不會是工讀生扮的吧",
+          price: 150,
+          quantity: 100,
+          img: "9",
+        },
+        {
+          id: 10,
+          name: "疲倦貓",
+          detail: "好累，它總是睏倦的樣子。",
+          price: 150,
+          quantity: 100,
+          img: "10",
+        },
+        {
+          id: 11,
+          name: "當機貓",
+          detail: "讀取中~它好像當機了。",
+          price: 150,
+          quantity: 100,
+          img: "11",
+        },
+        {
+          id: 12,
+          name: "抱歉貓",
+          detail: "它總是一副抱歉的表情。",
+          price: 150,
+          quantity: 100,
+          img: "12",
+        },
+        {
+          id: 13,
+          name: "比讚貓",
+          detail: "有這隻貓貓讚數會爆表！",
+          price: 150,
+          quantity: 100,
+          img: "13",
+        },
+        {
+          id: 14,
+          name: "不要貓",
+          detail: "小心它會對你說不要。",
+          price: 150,
+          quantity: 100,
+          img: "14",
+        },
+        {
+          id: 15,
+          name: "撐頭貓",
+          detail: "它會撐著頭看你表演。",
+          price: 150,
+          quantity: 100,
+          img: "15",
+        },
+      ];
       const list = document.querySelector(".list");
       let shoppingCart = {};
       let content = "";
@@ -351,27 +473,24 @@
       const checkoutBtn = document.querySelector("#checkoutBtn");
       const checkoutList = document.querySelector(".checkoutList");
 
-      for (let i = 1; i <= 15; i++) {
+      productData.forEach((element) => {
         const domString = `
         <div class="col">
           <div class="card">
-            <img src="./img/${i}.png" class="card-img-top" alt="cat" />
-            <div class="card-body">
+            <img src="./img/${element.img}.png" class="card-img-top" alt="cat" />
+            <div class="card-body >
               <h5 class="card-title placeholder-glow">
-                <strong>第${i}個商品</strong>
+                <strong>${element.name}</strong>
               </h5>
-              <p class="card-text placeholder-glow mb-2">
-                <span class="placeholder col-7"></span>
-                <span class="placeholder col-4"></span>
-                <span class="placeholder col-4"></span>
-                <span class="placeholder col-6"></span>
+              <p class="card-text mb-2">
+                ${element.detail}
               </p>
               <p class="text-center m-0">⭐⭐⭐⭐</p>
             </div>
             <div class="card-footer">
               <div class="row justify-content-center align-items-center g-2">
                 <div class="col text-center">
-                  <span class="fs-4 fw-bold">$${i * 159}</span>
+                  <span class="fs-4 fw-bold">$${element.price}</span>
                 </div>
                 <div class="col-auto">
                   <button class="btn btn-success">
@@ -388,7 +507,7 @@
                       />
                     </svg>
                   </button>
-                  <button onClick={addCart(${i})}  class="btn btn-secondary position-relative">
+                  <button onClick={addCart(${element.id})}  class="btn btn-secondary position-relative">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -402,7 +521,7 @@
                       />
                     </svg>
                     <span
-                      id="itemNum${i}"
+                      id="itemNum${element.id}"
                       class="visually-hidden position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
                     >
                       0
@@ -415,7 +534,7 @@
         </div>
         `;
         content += domString;
-      }
+      });
       list.innerHTML = content;
 
       // --------------------------
