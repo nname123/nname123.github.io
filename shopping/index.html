@@ -571,13 +571,16 @@
         let cartContent = "";
         Object.entries(shoppingCart).forEach(([key, value]) => {
           // console.log("列表的值", [key, value]);
+          let chooseProduct = productData.find(
+            (item) => item.id === parseInt(key)
+          );
           let cartString = `
         <li
             class="list-group-item d-flex justify-content-between align-items-start"
           >
             <div class="ms-2 me-auto">
-              <div class="fw-bold">第${key}個商品</div>
-              $${key * 159 * value}
+              <div class="fw-bold">${chooseProduct.name}</div>
+              $${chooseProduct.price}
             </div>
             <button type="button" class="btn my-auto" onClick="{decrease(${key})}" ><</button>
             <span class="badge bg-primary rounded-pill mx-1 my-auto">${value}</span>
@@ -592,7 +595,6 @@
         `;
           // console.log("長度", shoppingCart);
           cartContent += cartString;
-
           let itemNum = document.querySelector(`#itemNum${key}`);
           itemNum.classList.remove("visually-hidden");
           itemNum.textContent = value;
@@ -621,17 +623,20 @@
         let total = 0;
         Object.entries(shoppingCart).forEach(([key, value], index) => {
           // console.log("列表的值", [key, value]);
+          let chooseProduct = productData.find(
+            (item) => item.id === parseInt(key)
+          );
           let checkoutString = `
           <tr>
               <th scope="row">${index + 1}</th>
-              <td>第${key}個商品</td>
+              <td>${chooseProduct.name}</td>
               <td>${value}</td>
-              <td>${key * 159}</td>
-              <td>${key * 159 * value}</td>
+              <td>${chooseProduct.price}</td>
+              <td>${chooseProduct.price * value}</td>
           </tr>
         `;
           checkoutContent += checkoutString;
-          total += key * 159 * value;
+          total += chooseProduct.price * value;
         });
         checkoutContent += `
           <tr>
