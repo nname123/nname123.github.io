@@ -1,9 +1,0 @@
-.container {
-  font-family: "Noto Sans", sans-serif;
-  font-family: "Noto Sans TC", sans-serif;
-}
-.dots {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
